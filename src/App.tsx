@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Button, ConfigProvider, theme } from 'antd';
+import { StyleProvider } from '@ant-design/cssinjs';
+import 'dayjs/locale/zh-cn';
+import zhCN from 'antd/locale/zh_CN';
 
-function App() {
-  const [count, setCount] = useState(0)
+import $styles from './App.module.css';
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+const App = () => {
+    return (
+        <ConfigProvider
+            locale={zhCN}
+            theme={{
+                algorithm: theme.defaultAlgorithm,
+                token: {
+                    colorPrimary: '#00B96B',
+                },
+                components: {
+                    Layout: {
+                        colorBgBody: '',
+                    },
+                },
+            }}
+        >
+            <StyleProvider hashPriority="high">
+                <div className={$styles.app}>
+                    <div className={$styles.container}>
+                        欢迎来到3R教室，这是<span>React课程第一节</span>
+                        <Button
+                            type="primary"
+                            className="!tw-bg-lime-400 !tw-text-emerald-900"
+                            href="https://pincman.com/3r"
+                            target="_blank"
+                        >
+                            点此打开
+                        </Button>
+                    </div>
+                </div>
+            </StyleProvider>
+        </ConfigProvider>
+    );
+};
 
-export default App
+export default App;
